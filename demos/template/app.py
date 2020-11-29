@@ -77,7 +77,8 @@ def watchlist_with_static():
 # message flashing
 @app.route('/flash')
 def just_flash():
-    flash('I am flash, who is looking for me?')
+    #flash('I am flash, who is looking for me?')
+    flash('你好，这里是你问我不答')
     return redirect(url_for('index'))
 
 

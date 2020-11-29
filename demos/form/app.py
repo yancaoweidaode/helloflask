@@ -14,7 +14,7 @@ from flask_dropzone import Dropzone
 from flask_wtf.csrf import validate_csrf
 from wtforms import ValidationError
 
-from forms import LoginForm, FortyTwoForm, NewPostForm, UploadForm, MultiUploadForm, SigninForm, \
+from forms import QA, LoginForm, FortyTwoForm, NewPostForm, UploadForm, MultiUploadForm, SigninForm, \
     RegisterForm, SigninForm2, RegisterForm2, RichTextForm
 
 app = Flask(__name__)
@@ -46,11 +46,50 @@ app.config['DROPZONE_MAX_FILES'] = 30
 ckeditor = CKEditor(app)
 dropzone = Dropzone(app)
 
+# foo = 'i am fucer.'
+# app.jinja_env.globals['foo'] = foo
+
+@app.template_global()         # 这是一个全局函数，可以直接在html文件中调用
+def bar():
+    #d = "the production of b,c is："+str(b * c) 
+    # with open("test.txt", "r") as f:
+    #     data = f.read()        # 读取txt中的内容，并且显示在网站中
+    # data = read_txt()
+    return str(1347574)           # 此函数可以传入参数，然后在网页中进行显示
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
 
+@app.route('/QA1', methods=['GET', 'POST'])
+def QA1():
+    foo = " "
+    form = QA()
+    filename_passage = 'passage.txt'
+    filename_question = 'question.txt'
+    filename_answer = 'answer.txt'
+    if request.method == 'POST':     
+        passsge = request.form.get('Passage')
+        question = request.form.get('Question')
+        with open(filename_passage, 'w') as fp:
+            fp.write(passsge)
+        fp.close
+        with open(filename_question, 'w') as fp:
+            fp.write(question)
+        fp.close
+        with open(filename_answer, 'w') as fp:
+            fp.write(passsge)
+        fp.close
+        with open(filename_answer, 'r') as fp:
+            foo = fp.read()
+        fp.close
+        
+        app.jinja_env.globals['foo'] = foo
+        fp.close
+        
+        # flash('Welcome home, %s!' % passsge)
+        # return redirect(url_for('index'))
+    return render_template('QA_2.html', form=form)
 
 @app.route('/html', methods=['GET', 'POST'])
 def html():

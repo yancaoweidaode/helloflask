@@ -12,6 +12,17 @@ from wtforms import StringField, PasswordField, BooleanField, IntegerField, \
     TextAreaField, SubmitField, MultipleFileField
 from wtforms.validators import DataRequired, Length, ValidationError, Email
 
+#for question and answering
+class QA(FlaskForm):
+    #INPUT = CKEditorField('pessege', validators=[DataRequired()])
+    Passage = TextAreaField('Passage', validators=[DataRequired()])
+    Question = StringField('Question', validators=[DataRequired()])
+    Answer = TextAreaField('Answer', validators=[DataRequired()])
+    remember = BooleanField('Remember me')
+    submit_1 = SubmitField('END')
+    submit_2 = SubmitField('SUBMIT')
+    submit_3 = SubmitField('FIND')
+
 
 # 4.2.1 basic form example
 class LoginForm(FlaskForm):

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block metas %}
+    {{ super() }}
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+{% endblock %}
+
+{% block nav %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <br>
+        <a href="{{ url_for('index') }}">&larr; Return</a>
+        <h1 class="display-4">Question and Answering</h1>
+        <hr>
+        <form method="post">
+            {{ form.csrf_token }}
+            <div class="form-group">
+                {{ form.Passage.label }}
+                {% if form.Passage.errors %}
+                    {{ form.Passage(class='form-control is-invalid') }}
+                    {% for error in form.Passage.errors %}
+                        <div class="invalid-feedback">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {{ form.Passage(class='form-control') }}
+                {% endif %}
+            </div>
+            <br>
+            <br>
+            <div class="form-group">
+                {{ form.Question.label }}
+                {% if form.Question.errors %}
+                    {{ form.Question(class='form-control is-invalid') }}
+                    {% for error in form.Question.errors %}
+                        <div class="invalid-feedback">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {{ form.Question(class='form-control') }}
+                {% endif %}
+            </div>
+            <br>
+            <br>
+            {{ form.submit_2(class='btn btn-primary') }}<br>
+            <br>
+            <br>
+            {{"Answer"}}
+            <textarea name="Answer" rows="5" cols="120" >{{ foo }}</textarea>
+        </form>
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}
